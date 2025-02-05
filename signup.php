@@ -162,6 +162,6 @@
         <button name="signup" class="p-2 mb-5 w-full rounded border bg-indigo-400 hover:bg-indigo-500 text-gray-200">Sign up</button>
 
         <p class="text-center mb-5">Already have an account?<a href="login.php" class="underline text-slate-400 hover:text-slate-500">Login</a></p>
-    
+    </form>
 </body>
 </html>
