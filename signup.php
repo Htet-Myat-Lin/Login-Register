@@ -1,11 +1,11 @@
 <?php 
-    session_start();
+    // session_start();
     require_once 'Database/DbCreation.php';
+
+    $username = $email = $password = $confirmpwd = '';
+    $erruname = $erremail = $errpwd = '';
+
     if($_SERVER['REQUEST_METHOD']==="POST"){
-
-        $username = $email = $password = $confirmpwd = '';
-        $erruname = $erremail = $errpwd = '';
-
         function checkUsername($pdo,$uname,$dbname){
             $getUsername = "SELECT username FROM users WHERE username = :uname";
             $pdo->exec("USE `$dbname`");
@@ -86,9 +86,9 @@
             $password = $_POST['password'];
         }
 
-        $_SESSION['erruname'] = $erruname;
-        $_SESSION['erremail'] = $erremail;
-        $_SESSION['errpwd'] = $errpwd;
+        // $_SESSION['erruname'] = $erruname;
+        // $_SESSION['erremail'] = $erremail;
+        // $_SESSION['errpwd'] = $errpwd;
 
         if(!empty($username) && !empty($email) && !empty($password)){
             try{
@@ -106,13 +106,10 @@
                 $pdo = null;
                 $stmt = null;
                 header("Location: login.php");
-                die();
+                // die();
             }catch(PDOException $e){
                 die("Failed" .$e->getMessage());
             }
-        }else{
-            header("Location: signup.php");
-            die();
         }
     }
 ?>
@@ -130,29 +127,17 @@
         
         <div class="mb-5">
             <input type="text" name="username" placeholder="Username" class="placeholder:text-indigo-400 p-2 w-full focus:outline-none border border-indigo-400 rounded focus:border-indigo-700">
-            <?php 
-            if(isset($_SESSION['erruname']) && !empty($_SESSION['erruname'])){
-                $erruname = $_SESSION['erruname'];
-                echo '<p class="text-base mt-1 text-red-500">* ' . $erruname . '</p>';
-            } ?>
+            <?php if(!empty($erruname)) echo '<p class="text-base mt-1 text-red-500">* ' . $erruname . '</p>';?>
         </div>
 
         <div class="mb-5">
             <input type="name" name="email" placeholder="Email" class="placeholder:text-indigo-400 p-2 w-full focus:outline-none border border-indigo-400 rounded focus:border-indigo-700">
-            <?php 
-            if(isset($_SESSION['erremail']) && !empty($_SESSION['erremail'])){
-                $erremail = $_SESSION['erremail'];
-                echo '<p class="text-base mt-1 text-red-500">* ' . $erremail . '</p>';
-            } ?>
+            <?php if(!empty($erremail)) echo '<p class="text-base mt-1 text-red-500">* ' . $erremail . '</p>';?>
         </div>
 
         <div class="mb-5">
             <input type="password" name="password" placeholder="Password" class="placeholder:text-indigo-400 p-2 w-full focus:outline-none border border-indigo-400 rounded focus:border-indigo-700">
-            <?php 
-            if(isset($_SESSION['errpwd']) && !empty($_SESSION['errpwd'])){
-                $errpwd = $_SESSION['errpwd'];
-                echo '<p class="text-base mt-1 text-red-500">* ' . $errpwd . '</p>';
-            } ?>
+            <?php if(!empty($errpwd)) echo '<p class="text-base mt-1 text-red-500">* ' . $errpwd . '</p>';?>
         </div>
 
         <div class="mb-5">

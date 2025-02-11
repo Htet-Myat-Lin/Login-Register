@@ -28,10 +28,7 @@
         }else{
             $erruname = "Invalid username";
         }
-        $_SESSION['uerror'] = $erruname;
-        $_SESSION['perror'] = $errpwd;
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,20 +44,12 @@
 
         <div class="mb-5">
             <input type="text" name="username" placeholder="Username" class="placeholder:text-indigo-400 p-2 w-full focus:outline-none border border-indigo-400 rounded focus:border-indigo-700">
-            <?php 
-            if(isset($_SESSION['uerror']) && !empty($_SESSION['uerror'])){
-                $erruname = $_SESSION['uerror'];
-                echo '<p class="mt-1 text-red-500">* ' . $erruname . '</p>';
-            } ?>
+            <?php if(!empty($erruname)) echo '<p class="mt-1 text-red-500">* ' . $erruname . '</p>';?>
         </div>
 
         <div class="mb-5">
             <input type="password" name="password" placeholder="Password" class="placeholder:text-indigo-400 p-2 w-full focus:outline-none border border-indigo-400 rounded focus:border-indigo-700">
-            <?php 
-            if(isset($_SESSION['perror']) && !empty($_SESSION['perror'])){
-                $errpwd = $_SESSION['perror'];
-                echo '<p class="mt-1 text-red-500">* ' . $errpwd . '</p>';
-            } ?>
+            <?php if(!empty($errpwd)) echo '<p class="mt-1 text-red-500">* ' . $errpwd . '</p>';?>
         </div>
 
         <button class="p-2 mb-5 w-full rounded border bg-indigo-400 hover:bg-indigo-500 text-gray-200">Login</button>
